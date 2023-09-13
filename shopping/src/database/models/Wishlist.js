@@ -1,7 +1,5 @@
 const mongoose = require("mongoose");
-
 const Schema = mongoose.Schema;
-
 const WishlistSchema = new Schema({
   customerId: { type: String },
   products: [

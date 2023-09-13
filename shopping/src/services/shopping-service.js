@@ -23,7 +23,6 @@ class ShoppingService {
       );
       return data;
     }
-
     throw new Error("Product data not found!");
   }
 
@@ -67,7 +66,6 @@ class ShoppingService {
         return productResponse;
       }
     }
-
     return {};
   }
 
@@ -126,19 +124,6 @@ class ShoppingService {
         break;
     }
   }
-
-  // async GetOrderPayload(userId, order, event) {
-  //   if (order) {
-  //     const payload = {
-  //       event: event,
-  //       data: { userId, order },
-  //     };
-
-  //     return payload;
-  //   } else {
-  //     return FormateData({ error: "No Order Available" });
-  //   }
-  // }
 }
 
 module.exports = ShoppingService;

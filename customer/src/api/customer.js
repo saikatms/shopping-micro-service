@@ -63,5 +63,4 @@ module.exports = (app, channel) => {
       next(error);
     }
   });
-
 };

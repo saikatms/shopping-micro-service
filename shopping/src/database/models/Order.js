@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
-
 const Schema = mongoose.Schema;
-
 const OrderSchema = new Schema({
     orderId: { type: String },
     customerId: { type: String },

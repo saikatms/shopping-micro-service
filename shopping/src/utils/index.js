@@ -77,9 +77,7 @@ module.exports.SubscribeMessage = async (channel, service) => {
   await channel.assertExchange(EXCHANGE_NAME, "direct", { durable: true });
   const q = await channel.assertQueue("", { exclusive: true });
   console.log(` Waiting for messages in queue: ${q.queue}`);
-
   channel.bindQueue(q.queue, EXCHANGE_NAME, SHOPPING_SERVICE);
-
   channel.consume(
     q.queue,
     (msg) => {
@@ -98,9 +96,7 @@ module.exports.SubscribeMessage = async (channel, service) => {
 const requestData = async (RPC_QUEUE_NAME, requestPayload, uuid) => {
   try {
     const channel = await getChannel();
-
     const q = await channel.assertQueue("", { exclusive: true });
-
     channel.sendToQueue(
       RPC_QUEUE_NAME,
       Buffer.from(JSON.stringify(requestPayload)),

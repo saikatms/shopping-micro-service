@@ -17,7 +17,6 @@ Sentry.init({
   profilesSampleRate: 1.0, // Capture 100% of the transactions, reduce in production!
 });
 
-
 module.exports = (app) => {
     app.use((error, req, res, next) => {
       let reportError = true;

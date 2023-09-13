@@ -7,25 +7,27 @@ module.exports = (app, channel) => {
   RPCObserver("PRODUCT_RPC", service);
 
   app.post("/product/create", async (req, res, next) => {
-    const { name, desc, type, unit, price, available, suplier, banner } =
-      req.body;
+    const { name, desc, type, unit, price, available, suplier, banner } = req.body;
     // validation
-    const { data } = await service.CreateProduct({
-      name,
-      desc,
-      type,
-      unit,
-      price,
-      available,
-      suplier,
-      banner,
-    });
-    return res.json(data);
+    try {
+      const { data } = await service.CreateProduct({
+        name,
+        desc,
+        type,
+        unit,
+        price,
+        available,
+        suplier,
+        banner,
+      });
+      return res.json(data);
+    } catch (error) {
+      return res.status(404).json({ error });
+    }    
   });
 
   app.get("/category/:type", async (req, res, next) => {
     const type = req.params.type;
-
     try {
       const { data } = await service.GetProductsByCategory(type);
       return res.status(200).json(data);
@@ -36,7 +38,6 @@ module.exports = (app, channel) => {
 
   app.get("/:id", async (req, res, next) => {
     const productId = req.params.id;
-
     try {
       const { data } = await service.GetProductDescription(productId);
       return res.status(200).json(data);
@@ -47,8 +48,12 @@ module.exports = (app, channel) => {
 
   app.post("/ids", async (req, res, next) => {
     const { ids } = req.body;
-    const products = await service.GetSelectedProducts(ids);
-    return res.status(200).json(products);
+    try {
+      const products = await service.GetSelectedProducts(ids);
+      return res.status(200).json(products);
+    } catch (error) {
+      return res.status(404).json({ error });
+    }
   });
   
 

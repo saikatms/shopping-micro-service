@@ -17,7 +17,6 @@ class CustomerRepository {
 
   async CreateAddress({ _id, street, postalCode, city, country }) {
     const profile = await CustomerModel.findById(_id);
-
     if (profile) {
       const newAddress = new AddressModel({
         street,
@@ -25,12 +24,9 @@ class CustomerRepository {
         city,
         country,
       });
-
       await newAddress.save();
-
       profile.address.push(newAddress);
     }
-
     return await profile.save();
   }
 
@@ -40,9 +36,7 @@ class CustomerRepository {
   }
 
   async FindCustomerById({ id }) {
-    const existingCustomer = await CustomerModel.findById(id).populate(
-      "address"
-    );
+    const existingCustomer = await CustomerModel.findById(id).populate("address");
     return existingCustomer;
   }
 

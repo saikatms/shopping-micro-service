@@ -42,7 +42,6 @@ class ShoppingRepository {
 
   async ManageWishlist(customerId, product_id, isRemove = false) {
     const wishlist = await WishlistModel.findOne({ customerId });
-    console.log(">>>>>>>>>>>>wishlist",wishlist,customerId, product_id);
 
     if (wishlist) {
       if (isRemove) {
@@ -87,18 +86,14 @@ class ShoppingRepository {
 
     if (cart) {
       let amount = 0;
-
       let cartItems = cart.items;
-
       if (cartItems.length > 0) {
         //process Order
-
         cartItems.map((item) => {
           amount += parseInt(item.product.price) * parseInt(item.unit);
         });
 
         const orderId = uuidv4();
-
         const order = new OrderModel({
           orderId,
           customerId,
@@ -108,13 +103,11 @@ class ShoppingRepository {
         });
 
         cart.items = [];
-
         const orderResult = await order.save();
         await cart.save();
         return orderResult;
       }
     }
-
     return {};
   }
 

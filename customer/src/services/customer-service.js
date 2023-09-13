@@ -1,6 +1,5 @@
 const { CustomerRepository } = require("../database");
 const {
-  FormateData,
   GeneratePassword,
   GenerateSalt,
   GenerateSignature,
@@ -19,9 +18,8 @@ class CustomerService {
 
   async SignIn(userInputs) {
     const { email, password } = userInputs;
-
+    
     const existingCustomer = await this.repository.FindCustomer({ email });
-
     if (!existingCustomer)
       throw new NotFoundError("user not found with provided email id!");
 
