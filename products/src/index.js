@@ -2,7 +2,7 @@ const express = require('express');
 const { PORT } = require('./config');
 const { databaseConnection } = require('./database');
 const expressApp = require('./express-app');
-
+const errorHandler = require("./utils/errors")
 const StartServer = async() => {
 
     const app = express();
@@ -10,7 +10,9 @@ const StartServer = async() => {
     await databaseConnection();
     
     await expressApp(app);
-    console.log("PP",PORT);
+
+    errorHandler(app)
+
     app.listen(PORT, () => {
         console.log(`listening to port ${PORT}`);
     })
