@@ -7,13 +7,13 @@ const CartSchema = new Schema({
     items: [
         {   
             product: {
-                id: { type: String, require: true },
+                _id: { type: String, require: true },
                 name: { type: String },
                 img: { type: String },
                 unit: { type: Number },
                 price: { type: Number },
             } ,
-            unit: { type: Number, require: true} 
+            unit: { type: Number, require: true}
         }
     ]
 },

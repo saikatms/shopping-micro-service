@@ -1,15 +1,16 @@
-const { ValidateSignature } = require("../../utils");
-const { AuthorizeError } = require("../../utils/errors/app-errors");
+const { ValidateSignature } = require('../../utils');
+const { AuthorizeError } = require('../../utils/errors/app-errors');
 
-module.exports = async (req, res, next) => {
-  try {
-    const isAuthorized = await ValidateSignature(req);
+module.exports = async (req,res,next) => {
+    try {
+        const isAuthorized = await ValidateSignature(req);
 
-    if (isAuthorized) {
-      return next();
+        if(isAuthorized){
+            return next();
+        }
+        throw new AuthorizeError("Route Not Authorize")
+    } catch (error) {
+        next(error)
     }
-    throw new AuthorizeError("not authorised to access resources");
-  } catch (error) {
-    next(error);
-  }
-};
+    
+}
